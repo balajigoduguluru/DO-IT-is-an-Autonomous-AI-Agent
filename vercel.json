@@ -1,7 +1,4 @@
 {
-  "buildCommand": "pip install -e .[ai]",
-  "devCommand": "uvicorn src.api:app --reload",
-  "installCommand": "pip install -e .[ai]",
   "framework": "fastapi",
   "functions": {
     "src/api/**/*.py": {
