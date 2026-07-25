@@ -61,4 +61,4 @@ python_version = "3.11"
 strict = true
 ignore_missing_imports = true
 [tool.vercel]
-entrypoint = "src.api.server:app"
+entrypoint = "src.api:app"
