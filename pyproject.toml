@@ -1,0 +1,62 @@
+[project]
+name = "agentic-ai"
+version = "0.1.0"
+description = "A core framework for building Agentic AI systems with LangGraph"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Agentic AI Contributors"},
+]
+
+dependencies = [
+    "langgraph>=0.3.0",
+    "langgraph-sdk>=0.1.0",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "sqlite-utils>=3.0",
+    "chromadb>=0.5.0",
+    "websockets>=12.0",
+    "httpx>=0.27.0",
+    "python-dotenv>=1.0",
+    "openai>=1.50.0",
+    "litellm>=1.50.0",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5.0",
+    "mypy>=1.10.0",
+    "pre-commit>=3.0",
+]
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["agentic_ai*"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true

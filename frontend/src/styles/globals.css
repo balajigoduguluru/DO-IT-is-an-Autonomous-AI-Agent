@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --do-bg-primary: #F9F5F1; /* Warm peach/beige background */
+    --do-bg-secondary: #FFFFFF; /* Crisp white panels */
+    --do-bg-tertiary: #F0F0F0; /* Soft borders/hovers */
+    --do-text-primary: #1A1A1A;
+    --do-text-secondary: #71717A;
+    --do-text-tertiary: #A1A1AA;
+    
+    --do-accent: #1A1A1A; /* Dark contrast for buttons */
+    --do-active: #000000;
+    --do-success: #10B981;
+    --do-warning: #F59E0B;
+    --do-danger: #EF4444;
+
+    /* Much larger border radii for pill shapes */
+    --do-radius-sm: 12px;
+    --do-radius-md: 20px;
+    --do-radius-lg: 32px;
+    --do-radius-full: 9999px;
+  }
+
+  .dark {
+    /* Keep dark mode but make it slightly softer */
+    --do-bg-primary: #09090B;
+    --do-bg-secondary: #18181B;
+    --do-bg-tertiary: #27272A;
+    --do-text-primary: #FAFAFA;
+    --do-text-secondary: #A1A1AA;
+    --do-text-tertiary: #52525B;
+    --do-accent: #FAFAFA;
+  }
+}
+
+@layer utilities {
+  .shadow-do-soft {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  }
+  .shadow-do-floating {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-do-bg-primary text-do-text-primary antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom scrollbar for dark mode / premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--do-bg-tertiary);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--do-text-tertiary);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--do-bg-tertiary) transparent;
+}
