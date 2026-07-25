@@ -1,6 +1,7 @@
 """Application configuration loaded from environment variables and .env files."""
 
 from pathlib import Path
+import os
 
 from pydantic_settings import BaseSettings
 
@@ -42,6 +43,9 @@ class Settings(BaseSettings):
 
     def model_post_init(self, _context: object) -> None:
         """Ensure all data directories exist after settings are initialised."""
+        # Skip directory creation on Vercel (read-only filesystem)
+        if os.environ.get("VERCEL") == "1":
+            return
         self.DATA_DIR.mkdir(parents=True, exist_ok=True)
         self.CHROMA_DB_PATH.mkdir(parents=True, exist_ok=True)
         self.SQLITE_PATH.parent.mkdir(parents=True, exist_ok=True)
