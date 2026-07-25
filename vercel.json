@@ -1,12 +1,11 @@
 {
-  "buildCommand": "pip install -e .",
+  "buildCommand": "pip install -e .[ai]",
   "devCommand": "uvicorn src.api:app --reload",
-  "installCommand": "pip install -e .",
+  "installCommand": "pip install -e .[ai]",
   "framework": "fastapi",
   "functions": {
     "src/api/**/*.py": {
-      "maxDuration": 30,
-      "memory": 1024
+      "maxDuration": 30
     }
   },
   "regions": ["iad1"],
