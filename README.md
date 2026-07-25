@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./frontend/public/doit_logo.svg" alt="DO IT AI Logo" width="120" height="120" />
+  
   <h1>DO IT : Agentic AI Framework</h1>
   <p>
     <strong>A next-generation, autonomous, multi-agent execution platform.</strong>
@@ -138,5 +138,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 <div align="center">
-  <b>© 2026 DO IT Technologies. All rights reserved.</b>
+  <b>© DO IT is an Autonomous AI Agent.</b>
 </div>
