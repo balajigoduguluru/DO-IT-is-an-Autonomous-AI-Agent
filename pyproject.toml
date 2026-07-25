@@ -60,3 +60,5 @@ select = ["E", "F", "I", "N", "W"]
 python_version = "3.11"
 strict = true
 ignore_missing_imports = true
+[tool.vercel]
+entrypoint = "src.api.server:app"
