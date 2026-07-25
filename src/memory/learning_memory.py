@@ -10,6 +10,8 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -59,6 +61,20 @@ def _make_embedding(text: str, dim: int = _EMBEDDING_DIM) -> list[float]:
     return vec
 
 
+def _get_chroma_path(persist_directory: str | Path | None) -> Path:
+    """Get a writable path for ChromaDB, using /tmp on Vercel/serverless."""
+    if persist_directory:
+        return Path(persist_directory)
+    
+    # Check if running on Vercel (read-only FS except /tmp)
+    if os.environ.get("VERCEL") == "1":
+        # Use /tmp for Vercel serverless functions
+        return Path(tempfile.gettempdir()) / "chroma_db"
+    
+    # Default to settings path
+    return Path(settings.CHROMA_DB_PATH)
+
+
 # ---------------------------------------------------------------------------
 # Learning Memory
 # ---------------------------------------------------------------------------
@@ -83,12 +99,13 @@ class LearningMemory:
     COLLECTION_USER_PREFERENCES = "user_preferences"
     COLLECTION_PLAN_HISTORY = "plan_history"
 
-    def __init__(self, persist_directory: str | Path | None = None) -> None:
+def __init__(self, persist_directory: str | Path | None = None) -> None:
         """Initialise ChromaDB client and ensure collections exist.
 
         Args:
             persist_directory: Where ChromaDB stores its data on disk.
                                Defaults to ``settings.CHROMA_DB_PATH``.
+                               On Vercel serverless, uses /tmp/chroma_db.
         """
         if not _CHROMADB_AVAILABLE:
             raise RuntimeError(
@@ -96,7 +113,14 @@ class LearningMemory:
                 "Install it with: pip install chromadb"
             )
 
-        persist_path = Path(persist_directory or settings.CHROMA_DB_PATH)
+        # Use /tmp on Vercel (read-only FS except /tmp)
+        import os
+        is_vercel = os.environ.get("VERCEL") == "1"
+        if is_vercel and persist_directory is None:
+            persist_path = Path("/tmp/chroma_db")
+        else:
+            persist_path = Path(persist_directory or settings.CHROMA_DB_PATH)
+        
         persist_path.mkdir(parents=True, exist_ok=True)
 
         self.client = chromadb.PersistentClient(

@@ -69,8 +69,6 @@ async def lifespan(app: FastAPI) -> None:
 
     # Build the full LangGraph state machine with all dependencies.
     from src.engine.state_machine import AgenticStateMachine as LangGraphSM
-    from src.engine.parallel_executor import ParallelExecutor
-    from src.engine.dependency_graph import DependencyGraphBuilder
     from src.risk.risk_predictor import RiskPredictor
 
     learning_memory = None
@@ -90,9 +88,19 @@ async def lifespan(app: FastAPI) -> None:
         settings=settings,
     )
 
+    # Compile the LangGraph state machine (may fail if langgraph not installed)
+    langraph_app = None
+    try:
+        langraph_app = lg_sm.compile()
+        logger.info("LangGraph state machine compiled successfully")
+    except ImportError as exc:
+        logger.warning("LangGraph not available, state machine disabled: %s", exc)
+    except Exception as exc:
+        logger.error("Failed to compile LangGraph state machine: %s", exc)
+
     # Store on app.state for access in routes.
     app.state.tool_registry = registry
-    app.state.langraph_app = lg_sm.compile()
+    app.state.langraph_app = langraph_app
     app.state.learning_memory = learning_memory
     app.state.risk_predictor = risk_predictor
     app.state.approval_gate = None  # Lazy initialised in routes.
@@ -161,6 +169,15 @@ def create_app() -> FastAPI:
     from src.api.routes import router as rest_router
 
     app.include_router(rest_router, prefix="/api")
+
+    # -- Health check (no dependencies) -------------------------------------
+    @app.get("/health")
+    async def health_check():
+        return {
+            "status": "ok",
+            "langgraph_available": app.state.langraph_app is not None,
+            "learning_memory_available": app.state.learning_memory is not None,
+        }
 
     # -- Register WebSocket routes --------------------------------------------
     from src.api.websocket_manager import ws_router

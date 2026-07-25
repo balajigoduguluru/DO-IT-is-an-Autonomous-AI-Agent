@@ -1,0 +1,16 @@
+{
+  "buildCommand": "vercel build",
+  "devCommand": "uvicorn src.api:app --reload",
+  "installCommand": "pip install -e .",
+  "framework": "fastapi",
+  "functions": {
+    "src/api/**/*.py": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  },
+  "regions": ["iad1"],
+  "env": {
+    "PYTHONPATH": "."
+  }
+}
