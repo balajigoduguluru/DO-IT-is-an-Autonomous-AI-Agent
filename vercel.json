@@ -1,5 +1,5 @@
 {
-  "buildCommand": "vercel build",
+  "buildCommand": "pip install -e .",
   "devCommand": "uvicorn src.api:app --reload",
   "installCommand": "pip install -e .",
   "framework": "fastapi",
