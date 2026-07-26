@@ -1,4 +1,4 @@
-import React from 'react';
+import {} from 'react';
 
 export interface ApprovalRequest {
   id: string;

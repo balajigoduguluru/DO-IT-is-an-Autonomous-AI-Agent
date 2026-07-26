@@ -1,5 +1,6 @@
 {
-  "framework": "fastapi",
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "framework": null,
   "functions": {
     "src/api/**/*.py": {
       "maxDuration": 30
@@ -8,5 +9,6 @@
   "regions": ["iad1"],
   "env": {
     "PYTHONPATH": "."
-  }
+  },
+  "installCommand": "pip install -e ."
 }

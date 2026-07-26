@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import { useMemo } from 'react';
 import ReactFlow, {
   Background,
   Controls,
@@ -130,11 +130,7 @@ export default function DAGView({
     }));
   }, [taskEdges]);
 
-  const onLayout = useCallback(() => {
-    // ReactFlow auto-layout with dagre is deferred to user's preference;
-    // we provide a manual layout via position-based arrangement.
-    // This function can be enhanced with dagre if desired.
-  }, []);
+  // Layout can be enhanced with dagre if desired.
 
   if (loading) {
     return (
@@ -230,7 +226,7 @@ export default function DAGView({
           showInteractive={false}
         />
         <MiniMap
-          nodeColor={(node) => {
+          nodeColor={(node: any) => {
             const status = node.data?.status as string;
             switch (status) {
               case 'running':

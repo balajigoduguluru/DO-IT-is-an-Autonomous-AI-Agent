@@ -79,7 +79,6 @@ export default function LiveTimeline({
         {phases.map((phase, idx) => {
           const isCompleted = currentIdx > idx;
           const isCurrent = currentIdx === idx;
-          const isFuture = currentIdx < idx;
 
           return (
             <React.Fragment key={phase}>

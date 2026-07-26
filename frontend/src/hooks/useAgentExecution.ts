@@ -146,7 +146,7 @@ export function useAgentExecution() {
       // Handle file uploads if any
       if (attachments.length > 0) {
         import('../api/api').then(api => {
-           api.uploadFiles(sessionId, attachments.map(a => a.file)).catch(e => {
+           api.uploadFiles(sessionId, attachments.map(a => a.file)).catch(() => {
                toast.error('Failed to upload some attachments.');
            });
         });
