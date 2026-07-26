@@ -1,14 +1,17 @@
 {
   "buildCommand": "cd frontend && npm install && npm run build",
-  "framework": null,
+  "installCommand": "pip install -e .",
   "functions": {
-    "src/api/**/*.py": {
+    "api/index.py": {
       "maxDuration": 30
     }
   },
+  "rewrites": [
+    { "source": "/assets/(.*)", "destination": "/assets/$1" },
+    { "source": "/(.*)", "destination": "/api/index.py" }
+  ],
   "regions": ["iad1"],
   "env": {
     "PYTHONPATH": "."
-  },
-  "installCommand": "pip install -e ."
+  }
 }
