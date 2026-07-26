@@ -22,8 +22,6 @@ Traditional LLMs act as passive conversational chatbots that require constant pr
 
 It features an **adaptive execution graph** that mutates at runtime, learns from failures, and never wastes an API call. Coupled with a premium, dynamic React frontend, it brings true agentic autonomy to your browser.
 
-![Dashboard Preview](./frontend/public/screenshots/dashboard.png)
-*(Placeholder: Add your actual dashboard screenshot here)*
 
 ---
 
@@ -35,8 +33,6 @@ It features an **adaptive execution graph** that mutates at runtime, learns from
 *   **🧠 LangGraph State Machine:** Orchestrates autonomous agents through an adaptive execution pipeline—from goal interpretation to parallel task execution.
 *   **✨ Premium UI/UX:** Built with React, Vite, and Framer Motion, featuring glassmorphism, dynamic bento-grid templates, and a live reasoning panel that unboxes the AI's "black box."
 
-![Reasoning Panel Preview](./frontend/public/screenshots/terminal.png)
-*(Placeholder: Add your actual live terminal/reasoning panel screenshot here)*
 
 ---
 
