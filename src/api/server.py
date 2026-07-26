@@ -170,6 +170,17 @@ def create_app() -> FastAPI:
 
     app.include_router(rest_router, prefix="/api")
 
+    # -- Root route -----------------------------------------------------------
+    @app.get("/")
+    async def root():
+        return {
+            "name": "DO IT - Autonomous AI Agent",
+            "version": "0.1.0",
+            "docs": "/docs",
+            "health": "/health",
+            "api": "/api",
+        }
+
     # -- Health check (no dependencies) -------------------------------------
     @app.get("/health")
     async def health_check():
