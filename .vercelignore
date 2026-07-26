@@ -28,6 +28,12 @@ data/
 *.json
 !pyproject.toml
 !requirements.txt
+!frontend/package.json
+!frontend/package-lock.json
+!frontend/tsconfig.json
+!frontend/vite.config.ts
+!frontend/tailwind.config.js
+!frontend/postcss.config.js
 *.pkl
 *.pickle
 *.model
