@@ -1,6 +1,5 @@
 {
   "buildCommand": "cd frontend && npm install && npm run build",
-  "installCommand": "pip install -e .",
   "functions": {
     "api/index.py": {
       "maxDuration": 30
